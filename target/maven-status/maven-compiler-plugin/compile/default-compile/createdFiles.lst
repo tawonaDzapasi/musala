@@ -1,0 +1,9 @@
+com/musala/drone/entity/AuditTrail.class
+com/musala/drone/repository/MedicationRepository.class
+com/musala/drone/repository/AuditTrailRepository.class
+com/musala/drone/repository/DroneRepository.class
+com/musala/drone/enums/State.class
+com/musala/drone/DroneApplication.class
+com/musala/drone/enums/Model.class
+com/musala/drone/entity/Medication.class
+com/musala/drone/entity/Drone.class
