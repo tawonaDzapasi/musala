@@ -3,11 +3,14 @@ package com.musala.drone.controller;
 import com.musala.drone.entity.AuditTrail;
 import com.musala.drone.entity.Drone;
 import com.musala.drone.entity.Medication;
+import com.musala.drone.enums.State;
 import com.musala.drone.exception.DroneBatteryException;
 import com.musala.drone.exception.DroneNotFoundException;
 import com.musala.drone.exception.DroneWeightExceededException;
+import com.musala.drone.service.AuditTrailService;
 import com.musala.drone.service.DispatchService;
 import com.musala.drone.service.DroneService;
+import com.musala.drone.service.MedicationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +25,13 @@ public class DispatchController {
     DroneService droneService;
 
     @Autowired
+    AuditTrailService auditTrailService;
+
+    @Autowired
     DispatchService dispatchService;
 
+    @Autowired
+    MedicationService medicationService;
 
     @PostMapping("/register")
     public ResponseEntity<?> registerDrone(@Valid @RequestBody Drone drone){
@@ -50,6 +58,19 @@ public class DispatchController {
         }
 
 
+    }
+
+
+    @GetMapping("/{id}/loadedmedication")
+    public ResponseEntity<?> getDroneMedication(@PathVariable(name ="id" ) Long id){
+        AuditTrail auditTrail=auditTrailService.getAuditTrailByDroneId(id);
+        if(auditTrail==null){
+            return new ResponseEntity<>("no audit trail for this drone",HttpStatus.EXPECTATION_FAILED);
+        }
+        if(!(auditTrail.getDrone().getState().equals(State.LOADED)||auditTrail.getDrone().getState().equals(State.DELIVERING))){
+            return new ResponseEntity<>("drone is empty",HttpStatus.OK);
+        }
+       return new ResponseEntity<>(auditTrail.getMedications(),HttpStatus.OK);
     }
 
 
