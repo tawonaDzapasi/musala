@@ -60,6 +60,10 @@ public class DispatchController {
 
     }
 
+    @GetMapping("/droneavailable")
+    public ResponseEntity<?> getAvailableDrone(){
+        return new ResponseEntity<>(droneService.findDroneBySate(State.IDLE),HttpStatus.OK);
+    }
 
     @GetMapping("/{id}/loadedmedication")
     public ResponseEntity<?> getDroneMedication(@PathVariable(name ="id" ) Long id){
@@ -72,7 +76,15 @@ public class DispatchController {
         }
        return new ResponseEntity<>(auditTrail.getMedications(),HttpStatus.OK);
     }
+    @GetMapping("/audit")
+    public ResponseEntity<?> getAuditTrails(){
+        return new ResponseEntity<>(auditTrailService.getAll(),HttpStatus.OK);
+    }
 
+    @GetMapping("/medication")
+    public ResponseEntity<?> getAllMedication(){
+        return new ResponseEntity<>(medicationService.getAll(),HttpStatus.OK);
+    }
 
 
 
