@@ -64,7 +64,10 @@ public class DispatchController {
     public ResponseEntity<?> getAvailableDrone(){
         return new ResponseEntity<>(droneService.findDroneBySate(State.IDLE),HttpStatus.OK);
     }
-
+    @GetMapping("/{id}/dronebattery")
+    public ResponseEntity<?> getDroneBattery(@PathVariable(name ="id" ) Long id){
+        return new ResponseEntity<>(droneService.findDroneById(id).get().getBatteryCapacity()+"%",HttpStatus.OK);
+    }
     @GetMapping("/{id}/loadedmedication")
     public ResponseEntity<?> getDroneMedication(@PathVariable(name ="id" ) Long id){
         AuditTrail auditTrail=auditTrailService.getAuditTrailByDroneId(id);
