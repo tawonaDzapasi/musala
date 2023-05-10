@@ -1,1 +1,4 @@
 com/musala/drone/DroneApplicationTests.class
+com/musala/drone/service/impl/DispatchServiceImplTest.class
+com/musala/drone/service/impl/DroneServiceImplTest.class
+com/musala/drone/service/impl/AuditTrailServiceImplTest.class
