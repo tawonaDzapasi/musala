@@ -59,7 +59,6 @@ public class DispatchController {
 
 
     }
-
     @GetMapping("/droneavailable")
     public ResponseEntity<?> getAvailableDrone(){
         return new ResponseEntity<>(droneService.findDroneBySate(State.IDLE),HttpStatus.OK);
