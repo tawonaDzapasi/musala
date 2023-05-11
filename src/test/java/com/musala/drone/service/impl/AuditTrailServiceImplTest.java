@@ -37,7 +37,6 @@ class AuditTrailServiceImplTest {
     void getAuditTrailByDroneId() {
         AuditTrail auditTrail=new AuditTrail();
         auditTrail.setId(Long.valueOf(1));
-
         Mockito.lenient().when(auditTrailRepository.findByDroneId(Long.valueOf(1))).thenReturn(auditTrail);
         AuditTrail auditTrail1=auditTrailService.getAuditTrailByDroneId(Long.valueOf(1));
         Mockito.verify(auditTrailRepository,Mockito.times(1)).findByDroneId(Long.valueOf(1));
